@@ -109,6 +109,9 @@ Operators :
 					Or Student_Address = 'Pune'
 
 		Not :
+			Not return data in a  negative way.
+
+
 			
 
 	-- Comparision operator :
@@ -203,3 +206,96 @@ Operators :
 					Where Student_FirstName <> 'Rahul'
 
 	-- Special Operator :
+		In :
+			We can filter multiple or single value from the column.
+			Value must be comma seperated.
+
+			-- Syntax :
+				Select * from tbl_name
+				Where column_name in (expression1.expression2,...,expressionN)
+
+			-- Example :
+				Select * from tbl_Student
+
+				Select * from tbl_Student
+				Where Student_Address in ('Bangalore','baroda','Rajkot','Ahmedabad')
+
+				Select * from tbl_Student
+				Where Student_Address = 'Bangalore'
+					Or Student_Address = 'Baroda'
+					Or Student_Address = 'Rajkot'	
+					
+				-- With Not Operator
+				Select * from tbl_Student
+				Where Student_Address not in ('Bangalore','Rajkot','Ahmedabad')
+
+		Like :
+			Like operator use to find a value with search criteria Startwith,Endwith and 
+				contains.
+			We will use '%' sign to filter values.
+
+			-- Syntax :
+				-- Startwith
+				Select * from tbl_name
+				Where column_name like 'char/string%'
+
+				-- Endwith
+				Select * from tbl_name
+				where column_name like '%char/string'
+
+				-- Contains
+				Select * from tbl_name
+				Where column_name like '%char/string%'
+
+			-- Example :
+				Select * from tbl_Student
+				Where Student_FirstName like 'Pr%'
+
+				select * from tbl_Student
+				where Student_FirstName like '%i'
+
+				select * from tbl_Student
+				where Student_LastName like '%amin%'
+
+				-- With Not operator
+				Select * from tbl_Student
+				Where Student_FirstName not like 'Pr%'
+
+		Between :
+			When we want to define a range and based on that data is got 
+				filterd.
+			We can use And operator only with the between
+
+			-- Syntax :	
+				Select * from tbl_name
+				Where column_name between expression1 And expression2
+
+			-- Example :
+				Select * from tbl_Student
+				Where Student_Id between 3 And 6
+
+				Select * from tbl_Student
+				Where Student_Id between 6 And 3
+
+				-- With Not operator
+				Select * from tbl_Student
+				Where Student_Id not between 3 And 6
+
+		null :
+			To filter a data with null value.
+
+			-- Syntax :
+				Select * from tbl_name
+				Where column_name is null
+
+			-- Example :
+				Select * from tbl_Student
+				Where Student_EmailId is null
+
+				-- With not operator
+				Select * from tbl_Student
+				Where Student_EmailId is not null
+
+
+			
+			

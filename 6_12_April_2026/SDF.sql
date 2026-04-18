@@ -176,10 +176,172 @@ System Defined function (SDF) :
 						from tbl_Student
 
 				Trim :
-				Rtrim :
-				Ltrim :
-				Left :
-				Right :
-				Substring :
+					WhiteSpace is, space given at starting of the string and ending of the 
+						string. This space might be intentional or by mistake.
+						Ex : '  Hello World  '
+					Trim function removes whitespace from starting of the string and 
+						from ending of the string.
 
-		Date Function
+					-- Syntax :
+						Select trim(expression) from tbl_name
+
+					-- Example :
+						Select '  Hello World  ' --  Hello World  
+
+						Select trim('  Hello World  ') --Hello World
+
+						Select * from tbl_Student
+
+						-- I need to add a space in First Name 
+						--	where Student id is 2,3,6,4
+
+						Update tbl_Student set
+							Student_FirstName = '  ' + Student_FirstName + '  '
+						Where Student_Id in (2,3,6,4)
+
+						Select Student_Id,Student_FirstName, trim(Student_FirstName)
+							Student_LastNAme
+						from tbl_Student
+						Where Trim(Student_FirstName) like 't%'
+
+				Rtrim :
+					Rtrim remove whitespace only from the right side.
+
+					-- Sytntax :
+						Select Rtrim(expression) from tbl_name
+
+					-- Example :
+						Select ' Hello World ' -- Hello World 
+
+						Select Rtrim(' Hello World ') -- Hello World
+
+						Select Student_Id,Student_FirstName, Rtrim(Student_FirstName)
+							Student_LastNAme
+						from tbl_Student
+						Where RTrim(Student_FirstName) like 't%'
+
+				Ltrim :
+					Remove whitespace from left side only.
+
+					-- Syntax :
+						Select Ltrim(expression) from tbl_name
+
+					-- Example :
+						Select ' Hello World ' -- Hello World 
+
+						Select Ltrim(' Hello World ') --Hello World 
+
+						Select Student_Id,Student_FirstName, Ltrim(Student_FirstName)
+							Student_LastNAme
+						from tbl_Student
+						Where LTrim(Student_FirstName) like 't%' --Tanmay  
+
+				Left :
+					Left function extract no of char given by the user.
+					Left function always extract value from left to right and it is always start
+						with the index 1.
+
+					-- Syntax :
+						Select Left(expression,count_of_char) from tbl_name
+
+					-- Example :	
+						Select Left('Hello World',3)
+
+						Select Left(Trim(Student_Firstname),3) from tbl_Student
+
+						Select Trim(Left(Student_Firstname,3)) from tbl_Student
+
+
+
+				Right :
+					Right function extract no of char given by the user.
+					Right function always extract value from right to left 
+						and it is always start with the negative index.
+
+					-- Syntax :
+						Select Right(expression,count_of_char) from tbl_name
+
+					-- Example :
+						Select Right('Hello World',3)
+
+						Select Right(Trim(Student_Firstname),50) from tbl_Student
+
+						Select Trim(Left(Student_Firstname,3)) from tbl_Student
+
+				Substring :
+					Substring function use to extract value from string from any index.
+					We can extract no of character from string.
+
+					-- Syntax :
+						Select Substring(expression,Start_index,count_of_char) from tbl_name
+
+					-- Example :
+						Select Substring('Hello World',3,6) --llo Wo
+
+						H -1
+						E - 2
+						L - 3
+						L - 4
+						O - 5
+						Space - 6
+						W - 7
+						O - 8
+						R - 9
+						L - 10
+						D - 11
+
+						Select Substring('Hello World',3,20)
+
+						Select Student_FirstName,
+							Substring(Student_FirstName,3,5)
+						from tbl_Student
+
+		Date Function :
+			When we need to extract a particular value from date and time and 
+				with that if i want to find the diff from dates.
+
+			-- Types Of Date function :
+				Getdate() :
+					Getdate retuen current date and time of the system where my
+						SQL is installed.
+
+					-- Syntax :
+						Select getdate()
+
+					-- Example :
+						Select getdate() -- 2026-04-18 11:37:16.770
+
+						Select * from tbl_STudent
+
+						Alter table tbl_STudent
+						Add Inserted_Date datetime
+
+						Alter table tbl_STudent
+						Add Modified_Date datetime
+
+						Update tbl_Student Set
+							Student_MobileNo = 1234567,
+							Modified_Date = getdate()
+						Where Student_Id = 2
+
+				GetUTCDate() :
+					UTC is present as Coordinated Universal Time.
+					This is common across all the region or all the countries.
+					When our application runnin on multiple region we need to use
+						getutcdate function.
+
+					-- Syntax :
+						Select getutcdate()
+
+					-- Example :
+						Select getutcdate()
+
+						Select getdate()
+
+				Month
+				Day
+				Year
+				DateDiff
+				IsDate
+				Datename
+				Datepart

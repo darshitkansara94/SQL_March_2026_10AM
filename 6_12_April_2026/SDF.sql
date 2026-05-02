@@ -1,347 +1,288 @@
-System Defined function (SDF) :
-	System defined functions are functions that are already defined by the system
-		and we can use it multiple times.
-	Functions are a special code which we can write once and use multiple times.
-	When we use the same code multiple times it reduce duplicacy of code and 
-		easy to maintain code.
+2. String function
+	String function is use to manipulate string or if we want to do any opearation on
+		string value.
 
-	-- Types of SDF :
-		Aggregate function :
-			This function is use to perform mathemetical operations.
+	-- Types of string function
+		len() :
+			To identify the length od srtring.
 
-			-- Types of Aggregate function :
-				Sum() :
-					Give addition of two or more numbers.
+			-- Syntax :
+				len(expression)
 
-					-- Syntax :
-						Select SUM(expression) from tbl_name
+			-- Example :
+				Select LEN('Hello world')
 
-					-- Example :
-						Select SUM(10 + 10)
+				Select LEN('Hello world ')
 
-						Select * from tbl_StudentDetails						
+				Select LEN(' Hello world')
 
-						Select SUM(Student_Detail_Marks) as Total_Marks,
-							Student_Detail_Subject
-						from tbl_StudentDetails
+		concat :
+			Merge n no of words into single string.
 
-				Avg() :
-					Return average value of total numbers
+			-- Syntax :
+				concat(expression1,expression2,...,expressionN)
 
-					-- Syntax :
-						Select AVG(expression) from tbl_name
+			-- Example :
+				Select concat('Hello','world')
 
-					-- Example :
-						Select * from tbl_StudentDetails
+				Select concat('Hello world',' ','Weltec')
 
-						Select AVG(Student_Detail_Marks) as Average 
-						from tbl_StudentDetails
+		concat with + :
+			Concat string using +.
 
-				Count : 
-					Return total number of rows from table.
+			--- Syntax :
+				'Hello' + 'World'
 
-					-- Syntax :
-						Select Count(expression) from tbl_name
+			-- Example :
+				Select 'Hello'+ ' ' + 'World'
 
-					-- Example :
-						Select * from tbl_Student
+		concat_ws :
+			Use to concat two or more words into single string.
+			WS stand for with seperator.
 
-						Select COUNT(*) from tbl_Student
+			-- Syntax :
+				Concat_Ws(seperator,expression1,expression2,...,expressionN)
 
-						Select COUNT(Student_EmailId) from tbl_Student
-						Where Student_Address = 'Baroda'
+			-- Example :
+				Select concat_ws('-','Hello','World')
 
-						Select COUNT(Student_DOB) from tbl_Student						
+				Select concat_ws('-','Hello World','Weltec SQL')
 
-				Max :
-					This function return maximum value from column.
+				-- 123-456 789
 
-					-- Syntax :
-						Select Max(expression) from tbl_name
+				concat_ws('-',column1,concat_ws(' ',column2,column3))
 
-					-- Example :
-						Select MAX(Student_Detail_Marks) from tbl_StudentDetails
 
-				Min :
-					Return Minimum value from the column.
+				Select * from tbl_StudentMaster
 
-					-- Syntax :
-						Select Min(expression) from tbl_name
+				Select Concat_Ws('-',Student_Name,Student_Email) as NameEmail
+				from tbl_StudentMaster
 
-					-- Example :
-						Select Min(Student_Detail_Marks) from tbl_StudentDetails
+		trim() :
+			To avoid whitespace from the string we can use trim function.
+			It will remove space from starting and ending of the string.
+			Whitespace :
+				Any extra space at the starting and ending of the string 
+					is consider as whitespace.
 
-			Select Sum(Student_Detail_Marks) as Total_Marks,
-				AVG(Student_Detail_Marks) as Marks_Avg,
-				Count(*) as Total_Rows,
-				Max(Student_Detail_Marks) as Maximum_Marks,
-				MIN(Student_Detail_Marks) as Minimum_Marks
-			from tbl_StudentDetails
+			-- Syntax :
+				trim(expression)
 
-		String function :
-			String function use to manipulate string value.
+			-- Example :
+				Select ' Hello world ' -- Hello world 
+				Select trim(' Hello world ') --Hello world
 
-			-- Types of string function :
-				Len :
-					Use to idenify the length of string.
-					
-					-- Syntax :
-						Select LEN(expression) from tbl_name
+				Select trim(' Hello World') --Hello World
 
-					-- Example :
-						Select * from tbl_Student
+		rtrim() :
+			Remove whitespace from ending of the string or right side of the string.
 
-						Select LEN(Student_FirstName),
-							Student_FirstName
-						from tbl_Student
+			-- Syntax :
+				Rtrim(expression)
 
-				Concat with + :
-					Merge two or more than two words and present it as a single string.
+			-- Example :
+				Select ' Hello world '
+				Select rtrim(' Hello world ') -- Hello world				
 
-					-- Syntax :
-						Select expression1 + expression2 from tbl_name
+		ltrim() :
+			Remove whitespace from starting of the string or left side of the string.
 
-					-- Example :
-						Select 'Hello' + ' ' + 'World'
+			-- Syntax :
+				ltrim(expression)
 
-						Select * from tbl_Student
+			-- Example :
+				Select ' Hello world ' -- Hello world 
+				Select ltrim(' Hello world ') -- Hello world 
 
-						Select 
-							Student_FirstName,Student_LAstName,
-							Student_FirstName + ' ' + Student_LAstName as FullName
-						from tbl_Student
+		reverse :
+			Reverse function display string in reverse order.
 
-						Update tbl_Student set
-							Student_Fullname = Student_FirstName + ' ' + Student_LAstName
+			-- Syntax :
+				reverse(expression)
 
-				Concat :
-					Working scenerio is similar ot the concat with + but this is the string
-						function.
-					Compare to upper concat function this function is more accurate in terms
-						of performance.
+			-- Example :
+				Select reverse('Hello World')
 
-					-- Syntax :
-						Select Concat(expression1,expression2,...,expressionN)
+		substring() :
+			Substring extract char from the string value.
+			It has starting point and count of char that we need to extract.
+			Index is always start from 1.
 
-					-- Example :
-						Select Concat('Hello',' ','World')
+			-- Syntax :
+				substring(expression,starting_index,count)
 
-						Select Concat('Hello',' ','World',' ','Weltec')
+			-- Example :
+				Select Substring('Hello World',1,3)
 
-						Select Concat(Student_FirstName, ' ' ,Student_LastName) 
-						from tbl_Student
+				Select Substring('Hello World ',10,3)
 
-				Concat_WS :
-					WS present as a  with Seperator.
-					Working mechanism is similar to the conat function.
+		Replace :
+			Replace string or char into existing string value.
 
-					-- Syntax :
-						Select Concat_WS(seperator,expression1,expression2,...,expressionN)
-						from tbl_name
+			-- Syntax :
+				replace(expression,old_value,new_value)
 
-					-- Example :
-						Select concat_ws('-','Hello','World','Weltec') -- Hello-World
+			-- Example :
+				Select replace('Hello World','l','e')
 
-						Select Concat_ws(' ',Student_FirstName,Student_LastName)
-						from tbl_Student
+				Select replace('Hello World','d','Weltec')
 
-				Upper :
-					Convert a string valu into upper case.
+		charindex :
+			charindex use to identify the index of the char from string.
+			It will retyrn first char index found in string.
 
-					-- Syntax :
-						Select Upper(expression) from tbl_name
+			-- Syntax :
+				charindex(char,expression)
 
-					-- Example :
-						Select Upper('hello')
+			-- Example :
+				Select charindex('a','Today is a sunday')
 
-						Select Upper('heLLo')
+				Select charindex('is','Today is a sunday')
 
-					
-				Lower :
-					Convert a string value into lower case
+		upper :
+			It will return string in upper case.
 
-					-- Syntax :
-						Select Lower(expression) from tbl_name
+			-- Syntax :
+				upper(expression)
 
-					-- Example :
-						Select lower('Hello')
+			-- Example :
+				Select upper('Today is a Sunday')
 
-						Select	
-							Upper(Student_FirstName),Lower(Student_FirstName)
-						from tbl_Student
+		lower :
+			It will retune string in lower case.
 
-						Select	
-							Upper(Concat_ws(' ',Student_FirstName,
-								Student_Lastname))
-						from tbl_Student
+			-- Syntax :
+				lower(expression)
 
-				Trim :
-					WhiteSpace is, space given at starting of the string and ending of the 
-						string. This space might be intentional or by mistake.
-						Ex : '  Hello World  '
-					Trim function removes whitespace from starting of the string and 
-						from ending of the string.
+			-- Example :
+				Select lower('Today is a Sunday')
 
-					-- Syntax :
-						Select trim(expression) from tbl_name
+3. Date function :
+	Date function extract value or we can perform some operation on the date.
+	it will work with datetime datatype.
 
-					-- Example :
-						Select '  Hello World  ' --  Hello World  
+	-- Types of date function :
+		sysdatetime :
+			Return your system date and time
 
-						Select trim('  Hello World  ') --Hello World
+			-- Syntax :
+				sysdatetime()
 
-						Select * from tbl_Student
+			-- Example :
+				Select sysdatetime()
 
-						-- I need to add a space in First Name 
-						--	where Student id is 2,3,6,4
+		sysutcdatetime :
+			UTC is Universal date and time.
+			It will return UTC time which is not depend on any country or location
 
-						Update tbl_Student set
-							Student_FirstName = '  ' + Student_FirstName + '  '
-						Where Student_Id in (2,3,6,4)
+			-- Synatx :
+				sysutcdatetime()
 
-						Select Student_Id,Student_FirstName, trim(Student_FirstName)
-							Student_LastNAme
-						from tbl_Student
-						Where Trim(Student_FirstName) like 't%'
+			-- Example :
+				Select sysutcdatetime()
 
-				Rtrim :
-					Rtrim remove whitespace only from the right side.
+		getdate :
+			Return date and time, But it will return date and time of the system
+				where our SQL / Our database is located.
 
-					-- Sytntax :
-						Select Rtrim(expression) from tbl_name
+			-- Syntax :
+				getdate()
 
-					-- Example :
-						Select ' Hello World ' -- Hello World 
+			-- Example :
+				Select getdate()
 
-						Select Rtrim(' Hello World ') -- Hello World
+		getutcdate :
+			It will return universal date and time.
+			Compare to sysutcdatetime it will return more accurate result.
 
-						Select Student_Id,Student_FirstName, Rtrim(Student_FirstName)
-							Student_LastNAme
-						from tbl_Student
-						Where RTrim(Student_FirstName) like 't%'
+			-- Syntax :
+				getutcdate()
 
-				Ltrim :
-					Remove whitespace from left side only.
+			-- Example :
+				Select getutcdate()
 
-					-- Syntax :
-						Select Ltrim(expression) from tbl_name
+		month
+			It will return only month from date
 
-					-- Example :
-						Select ' Hello World ' -- Hello World 
+			-- Syntax :
+				month(date)
 
-						Select Ltrim(' Hello World ') --Hello World 
+			-- Example :
+				Select month(getdate())
 
-						Select Student_Id,Student_FirstName, Ltrim(Student_FirstName)
-							Student_LastNAme
-						from tbl_Student
-						Where LTrim(Student_FirstName) like 't%' --Tanmay  
+		day :
+			Return current date only.
 
-				Left :
-					Left function extract no of char given by the user.
-					Left function always extract value from left to right and it is always start
-						with the index 1.
+			-- Syntax :
+				day(date)
 
-					-- Syntax :
-						Select Left(expression,count_of_char) from tbl_name
+			-- Example :
+				Select day(getdate())
 
-					-- Example :	
-						Select Left('Hello World',3)
+				Select day('2025-10-14 10:27:05.120')
 
-						Select Left(Trim(Student_Firstname),3) from tbl_Student
+				Select getdate() + 2
 
-						Select Trim(Left(Student_Firstname,3)) from tbl_Student
+		year :
+			Return year only from date and time
 
+			-- Syntax :
+				Year(date)
 
+			-- Example :
+				select year(getdate())
 
-				Right :
-					Right function extract no of char given by the user.
-					Right function always extract value from right to left 
-						and it is always start with the negative index.
+		datename :
+			Datename return a value as a string.
+			We can use a sub function to get a value using datename function.
 
-					-- Syntax :
-						Select Right(expression,count_of_char) from tbl_name
+			-- Example :
+				Select datename(day,getdate()) as current_day
+				Select datename(month,getdate()) as current_month
+				Select datename(year,getdate()) as current_year
 
-					-- Example :
-						Select Right('Hello World',3)
+				Select datename(DAYOFYEAR,getdate()) as Day_Of_Year
+				Select datename(QUARTER,getdate()) as current_Quater
+				Select datename(WEEKDAY,getdate()) as current_Weekday
+				Select DATENAME(WEEK,GETDATE()) as current_week
 
-						Select Right(Trim(Student_Firstname),50) from tbl_Student
+				Select DATENAME(hour,GETDATE()) as current_hour
+				Select datename(MINUTE,GETDATE()) as current_minute
+				Select datename(SECOND,GETDATE()) as current_second
+				Select datename(MILLISECOND,GETDATE()) as current_milisecond
 
-						Select Trim(Left(Student_Firstname,3)) from tbl_Student
+				Select DATENAME(ISO_WEEK,GETDATE()) as current_ISO_Week
 
-				Substring :
-					Substring function use to extract value from string from any index.
-					We can extract no of character from string.
+		datepart :
+			This function is similar to the datename function but only the difference is 
+				th output of this function is in int type.
 
-					-- Syntax :
-						Select Substring(expression,Start_index,count_of_char) from tbl_name
+			-- Example :
+				Select datepart(day,getdate()) as current_day
+				Select datepart(month,getdate()) as current_month
+				Select datepart(year,getdate()) as current_year
+				Select datepart(DAYOFYEAR,getdate()) as Day_Of_Year
+				Select datepart(QUARTER,getdate()) as current_Quater
+				Select datepart(WEEKDAY,getdate()) as current_Weekday
+				Select datepart(WEEK,GETDATE()) as current_week
+				Select datepart(hour,GETDATE()) as current_hour
+				Select datepart(MINUTE,GETDATE()) as current_minute
+				Select datepart(SECOND,GETDATE()) as current_second
+				Select datepart(MILLISECOND,GETDATE()) as current_milisecond
+				Select datepart(ISO_WEEK,GETDATE()) as current_ISO_Week
+				
+		isdate :
+			IsDate function validate date is valid format or given date is valid or not.
+			Output is either 0 or 1, If date is valid then o/p is 1 else 0.
 
-					-- Example :
-						Select Substring('Hello World',3,6) --llo Wo
+			-- Syntax :
+				isdate(date)
 
-						H -1
-						E - 2
-						L - 3
-						L - 4
-						O - 5
-						Space - 6
-						W - 7
-						O - 8
-						R - 9
-						L - 10
-						D - 11
+			-- Example :
+				Select isdate(getdate())
 
-						Select Substring('Hello World',3,20)
+				Select getdate()
 
-						Select Student_FirstName,
-							Substring(Student_FirstName,3,5)
-						from tbl_Student
-
-		Date Function :
-			When we need to extract a particular value from date and time and 
-				with that if i want to find the diff from dates.
-
-			-- Types Of Date function :
-				Getdate() :
-					Getdate retuen current date and time of the system where my
-						SQL is installed.
-
-					-- Syntax :
-						Select getdate()
-
-					-- Example :
-						Select getdate() -- 2026-04-18 11:37:16.770
-
-						Select * from tbl_STudent
-
-						Alter table tbl_STudent
-						Add Inserted_Date datetime
-
-						Alter table tbl_STudent
-						Add Modified_Date datetime
-
-						Update tbl_Student Set
-							Student_MobileNo = 1234567,
-							Modified_Date = getdate()
-						Where Student_Id = 2
-
-				GetUTCDate() :
-					UTC is present as Coordinated Universal Time.
-					This is common across all the region or all the countries.
-					When our application runnin on multiple region we need to use
-						getutcdate function.
-
-					-- Syntax :
-						Select getutcdate()
-
-					-- Example :
-						Select getutcdate()
-
-						Select getdate()
-
-				Month
-				Day
-				Year
-				DateDiff
-				IsDate
-				Datename
-				Datepart
+				Select isdate('2025-11-31 11:03:20.837')
+				
+		

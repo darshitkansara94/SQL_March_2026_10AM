@@ -11,5 +11,5 @@ Begin
 	print('Age = ' + cast(@Age as nvarchar(5)))
 
 	Insert into tbl_Employee(Employee_Id,Employee_Name,Employee_Age)
-	values(@Id,@Name,@Age)
+	values(@Id,@Name,@Age)	
 End

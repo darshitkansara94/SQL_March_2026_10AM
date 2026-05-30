@@ -63,3 +63,25 @@ Store Procedure :
 			@Id = 13,
 			@Name = 'Varsha',
 			@Age = 28
+
+		Exec sp_InsertCategoryAndSubCategory
+			@Category_Name = 'TV',
+			@Category_Id = 2,
+			@SubCategory_Name = 'Sony',
+			@Subcategory_Price = 65000,
+			@Subcategory_Qty = 1
+
+			Select * from tbl_Category
+			Select * from tbl_SubCategory
+
+			Select * from tbl_Employee
+
+			Exec sp_UpdateEmployee
+				@Id = 3,
+				@Employee_Age = 29
+
+-- Assignment :
+	--I need to create a single procedure which perform all four operation like insert, update, delete and select.
+	--If user want to perform insert then only insert query should execute.
+
+	--We can achieve this using conditions.
